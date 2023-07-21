@@ -1,75 +1,85 @@
 import {
-    Add_products,
-    Add_cart,
-    Product_view,
-    Cart_items,
-    update_cart,
-    delete_cart
-  } from "../actions";
-  
-  let initialState = {
-    products: [],
-    cart: [],
-    itemToDisplay: "",
-    totalCart: 0,
-  };
-  export default function products(state = initialState, actions) {
-    switch (actions.type) {
-      case Add_products:
-        return {
-          ...state,
-          products: actions.products,
-        };
-        break;
+  Add_products,
+  Add_cart,
+  Product_view,
+  Cart_items,
+  update_cart,
+  delete_cart,
+} from "../actions";
+
+let initialState = {
+  products: [],
+  cart: [],
+  itemToDisplay: "",
+  totalCart: 0,
+};
+
+// Load cart items from localStorage (if available)
+const persistedCart = localStorage.getItem("cartItems");
+if (persistedCart) {
+  initialState.cart = JSON.parse(persistedCart);
+}
+
+export default function products(state = initialState, action) {
+  switch (action.type) {
+    case Add_products:
+      return {
+        ...state,
+        products: action.products,
+      };
       case Add_cart:
-        let flag = state.cart.indexOf(actions.cart);
-        if (flag!==-1) {
-          actions.cart.qty += 1;
-          return {
-            ...state,
-          };
+        let flag = state.cart.findIndex((item) => item.id === action.cart.id);
+        if (flag !== -1) {
+          state.cart[flag].qty += 1;
         } else {
-          return {
-            ...state,
-            cart: [actions.cart, ...state.cart],
-          };
+          state.cart.push(action.cart);
         }
-        break;
-  
-      case Product_view:
+        // Save updated cart to localStorage
+        localStorage.setItem("cartItems", JSON.stringify(state.cart));
         return {
           ...state,
-          itemToDisplay: actions.view,
+          cart: [...state.cart],
         };
-        break;
-      case Cart_items:
-        let { cart } = state;
-        let total = cart.reduce((total, item) => {
-          return (total += item.qty);
-        }, 0);
+    case Product_view:
+      return {
+        ...state,
+        itemToDisplay: action.view,
+      };
+    case Cart_items:
+      let total = state.cart.reduce((total, item) => {
+        return (total += item.qty);
+      }, 0);
+      // Update the cart number in Redux state and also save it to localStorage
+      localStorage.setItem("cartItems", JSON.stringify(state.cart));
+      localStorage.setItem("cartNumber", total);
+      return {
+        ...state,
+        totalCart: total,
+      };
+    case update_cart:
+      let index = state.cart.indexOf(action.updatedItem);
+      if (index !== -1) {
+        state.cart[index] = action.updatedItem;
+        // Save updated cart to localStorage
+        localStorage.setItem("cartItems", JSON.stringify(state.cart));
         return {
           ...state,
-          totalCart: total,
+          cart: [...state.cart],
         };
-        break;
-      case update_cart:
-        let index = state.cart.indexOf(actions.updatedItem);
-        let updatedCart = null;
-        if (index !== -1) {
-          state.cart[index] = actions.updatedItem;
-          updatedCart = state.cart;
-        }
-        return {
-          ...state,
-          cart: [...updatedCart],
-        };
-      case delete_cart:
-        let position = state.cart.indexOf(actions.item);
+      }
+      return state;
+    case delete_cart:
+      let position = state.cart.indexOf(action.item);
+      if (position !== -1) {
         state.cart.splice(position, 1);
+        // Save updated cart to localStorage
+        localStorage.setItem("cartItems", JSON.stringify(state.cart));
         return {
           ...state,
-        }
-      default:
-        return state;
-    }
+        };
+      }
+      return state;
+    default:
+      return state;
   }
+}

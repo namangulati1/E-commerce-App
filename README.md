@@ -1,71 +1,82 @@
-# Getting Started with Create React App
+# Ecommerce Website Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend for an ecommerce website built using React and Redux. The website allows users to view a list of products, view product details, add products to the cart, and manage the cart items. The frontend interacts with a dummy ecommerce API service to fetch product data and handle CRUD operations.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Navbar**: The navbar displays the cart items count and relevant navigation links.
 
-### `npm start`
+- **All Products Page**: Users can view a list of products fetched from the API. Each product has options for inline editing and deletion. An alert/notification is shown on editing or deleting a product.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Product Detail Page**: Users can view detailed information of a product on its dedicated page. The page includes all the product details and an option to add the product to the cart.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Sort Button**: The sort button allows users to sort products by "price." Clicking the button will display a cross button beside it to remove the sorting.
 
-### `npm test`
+- **Add to Cart Button**: Users can add products to the cart from the All Products and Product Detail pages. An alert/notification is shown after adding a product to the cart.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Cart Page**: The Cart page displays all the items in the cart. Users can view the names, quantities, and prices of the products in the cart.
 
-### `npm run build`
+- **Error and Success Handling**: The frontend handles errors from the API and displays appropriate Alert/Notification messages. Success alerts are shown for successful operations like adding products to the cart.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To run the app locally on your machine, follow these steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository: `git clone https://github.com/namangulati1/E-commerce-App.git`
+2. Change directory: `cd E-commerce-App`
+3. Install dependencies: `npm install`
+4. Run the app: `npm start`
 
-### `npm run eject`
+The app will be running at [http://localhost:3000](http://localhost:3000).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Dependencies
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This app is built using React and utilizes the Fetch API to interact with the JSONPlaceholder API. The major dependencies used in this project are:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- React: ^17.0.2
+- React-dom: ^17.0.2
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Folder Structure
 
-## Learn More
+The folder structure of the project is as follows:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+contact-list-app/
+├── src/
+│ ├── actions/
+│ │ ├── index.js
+│ ├── apiCall/
+│ │ ├── index.js
+│ ├── components/
+│ │ ├── AddProduct.js
+│ │ └── Cart.js
+│ │ └── CartItems.js
+│ │ └── Nav.js
+│ │ └── ProductDetail.js
+│ │ └── ProductItem.js
+│ │ └── ProductItemList.js
+│ │ └── Sort.js
+│ ├── Nodtification/
+│ │ ├── notify.js
+│ ├── reducers/
+│ │ ├── index.js
+│ ├── utils/
+│ │ ├── appSlice.js
+│ │ ├── store.js
+│ ├── App.js
+│ ├── App.css
+│ ├── index.js
+│ └── index.css
+├── public/
+│ └── index.html
+├── .gitignore
+├── package.json
+├── package-lock.json
+└── README.md
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to create a pull request or open an issue.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# E-commerce-App
